@@ -1,3 +1,9 @@
+/*
+Jason Lin
+SoftDev2 pd7
+K00 -- I See a Red Door...
+2019-01-30
+*/
 var c = document.getElementById('slate');
 //Instantiate the context of the canvas
 var ctx = c.getContext("2d");
