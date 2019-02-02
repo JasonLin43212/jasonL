@@ -36,7 +36,7 @@ clearButton.addEventListener('click', (e) => {
     clearCanvas();
 });
 
-//Event listener for
+//Event listener for toggle
 toggleButton.addEventListener('click', (e) => {
     //Prevent default stops button from submitting or hyperlinking
     e.preventDefault();
@@ -60,7 +60,6 @@ var toggleMode = () => {
     }
 }
 
-
 //Draws rectangle or dot based on x and y
 var draw = (x,y) => {
     if (state === "box"){
@@ -74,5 +73,3 @@ var draw = (x,y) => {
         ctx.fill();//Fills in the path
     }
 };
-//console.log(clearButton);
-//console.log(toggleButton);
