@@ -1,13 +1,13 @@
 '''
-Blinking Retina -- Tina Wong - Jason Lin
+Ling Ling -- Kevin Lin and Jason Lin
 SoftDev2 pd7
-K06 -- Yummy Mongo Py
-2019-02-28
+K07 -- Import/Export Bank
+2019-03-04
 '''
 import pymongo
-#SERVER_ADDR = "142.93.6.251" # Tina's droplet
-#SERVER_ADDR = "142.93.57.60" # Jason's droplet
-SERVER_ADDR = "68.183.104.137" # Kevin's droplet
+
+SERVER_ADDR = "142.93.57.60" # Jason's droplet
+#SERVER_ADDR = "68.183.104.137" # Kevin's droplet
 connection = pymongo.MongoClient(SERVER_ADDR)
 db = connection.restaurants
 #collection = db.restaurants
