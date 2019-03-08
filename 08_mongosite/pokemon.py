@@ -27,8 +27,9 @@ with open('pokemon.json') as f:
     data = json.load(f)
 
 #only inserts the pokemon data into the collection
-for i in data["pokemon"]:
+for i in data["pokemon"]: 
     collection.insert_one(i)
+
 
 #given the name of the pokemon (lowercase), returns the information on that pokemon
 #basically just gives url and name from the db
@@ -44,8 +45,28 @@ def type(types):
 def weaknesses(weak):
     return list(collection.find({'weaknesses': weak}))
 
+def height(height):
+    all_pokemon = collection.find()
+    output = [ ]
+    for pokemon in all_pokemon:
+        num=float(pokemon["height"][:-2])
+        if num>=height-1 and num<=height+1:         
+            output.append(pokemon)
+    return output
+
+def weight(weight):
+    all_pokemon = collection.find()
+    output = [ ]
+    for pokemon in all_pokemon:
+        num=float(pokemon["weight"][:-3])
+        if num>=weight-1 and num<=weight+1:         
+            output.append(pokemon)
+    return output
+
 #test
 #print (name("Bulbasaur"))
 #print (id(2))
 #print (type("Fire"))
 #print (weaknesses("Water"))
+#print (height(1))
+#print (weight(3))

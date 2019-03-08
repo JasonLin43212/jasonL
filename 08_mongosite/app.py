@@ -1,3 +1,10 @@
+'''
+BleepingRetinalings - Jason Lin, Tina Wong, Emily Lee
+SoftDev2 pd07
+K#08 -- Ay Mon, Go Git It From Yer Flask
+2019-03-08
+'''
+
 from flask import Flask, render_template, request
 from pymongo import MongoClient
 import json
@@ -37,7 +44,7 @@ def index():
             result_list = type(search_type)
             query = "For Pokemon with types: " + request.args.get("type")
         elif "weaknesses" in request.args:
-            search_type = request.args.get("weaknesses").lower().capitalze()
+            search_type = request.args.get("weaknesses").lower().capitalize()
             result_list = weaknesses(search_type)
             query = "For Pokemon with weaknesses: " + request.args.get("weaknesses")
         elif "height" in request.args:
@@ -45,7 +52,7 @@ def index():
             query = "For Pokemon with heights: " + request.args.get("height") + " +/- 1 meter"
         elif "weight" in request.args:
             result_list = weight(float(request.args.get("weight")))
-            query = "For Pokemon with weights: " + request.args.get("weight") + " +/- 1 meter"
+            query = "For Pokemon with weights: " + request.args.get("weight") + " +/- 1 kilogram"
         has_result = True
     elif "submit" in request.form:
         reconnect(request.form.get("ip_address"))
