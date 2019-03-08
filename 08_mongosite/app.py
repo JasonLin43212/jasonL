@@ -1,76 +1,84 @@
-#Lingo -- Kevin Lin and Jason Lin
-#SoftDev1 pd07
-#K08 -- Ay Mon, Go Git It From Yer Flask
-#2019-03-06
-
 from flask import Flask, render_template, request
 from pymongo import MongoClient
 import json
 app = Flask(__name__) # instantiates an instance of Flask
 
-
 SERVER_ADDR = "142.93.57.60" # Jason's droplet
-#SERVER_ADDR = "68.183.104.137" # Kevin's droplet
+#SERVER_ADDR = "142.93.6.251" # Tina's droplet
+#SERVER_ADDR = "157.230.218.44" # Emily's droplet
+
 connection = MongoClient(SERVER_ADDR)
-db = connection.Lingo
-collection = db.prizes
-prizeDct = None
+db = connection.BleepingRetinalings
+collection = db.pokemons
+with open("pokemon.json") as input:
+    collection.drop()
+    collection.insert_many(json.load(input)["pokemon"])
 
-@app.route("/") #Linking a function to a route
-def home():
-    return render_template("nobel.html")
+def reconnect(address):
+    global connection
+    global db
+    global collection
+    connection = MongoClient(address)
+    db = connection.BleepingRetinalings
+    collection = db.pokemons
+    with open("pokemon.json") as input:
+        collection.drop()
+        collection.insert_many(json.load(input)["pokemon"])
 
+@app.route("/", methods=["GET","POST"]) #Linking a function to a route
+def index():
+    global SERVER_ADDR
+    result_list = []
+    has_result = False
+    query = ""
+    if "submit" in request.args:
+        if "type" in request.args:
+            search_type = request.args.get("type").lower().capitalize()
+            result_list = type(search_type)
+            query = "For Pokemon with types: " + request.args.get("type")
+        elif "weaknesses" in request.args:
+            search_type = request.args.get("weaknesses").lower().capitalze()
+            result_list = weaknesses(search_type)
+            query = "For Pokemon with weaknesses: " + request.args.get("weaknesses")
+        elif "height" in request.args:
+            result_list = height(float(request.args.get("height")))
+            query = "For Pokemon with heights: " + request.args.get("height") + " +/- 1 meter"
+        elif "weight" in request.args:
+            result_list = weight(float(request.args.get("weight")))
+            query = "For Pokemon with weights: " + request.args.get("weight") + " +/- 1 meter"
+        has_result = True
+    elif "submit" in request.form:
+        reconnect(request.form.get("ip_address"))
+        SERVER_ADDR = request.form.get("ip_address")
+    return render_template('index.html',result = result_list, display = has_result, addr=SERVER_ADDR, search = query)
+
+def type(types):
+    global collection
+    return list(collection.find({'type': types}))
+
+def weaknesses(weak):
+    global collection
+    return list(collection.find({'weaknesses': weak}))
+
+def height(height):
+    global collection
+    all_pokemon = collection.find()
+    output = []
+    for pokemon in all_pokemon:
+        num=float(pokemon["height"][:-2])
+        if num>=height-1 and num<=height+1:
+            output.append(pokemon)
+    return output
+
+def weight(weight):
+    global collection
+    all_pokemon = collection.find()
+    output = []
+    for pokemon in all_pokemon:
+        num=float(pokemon["weight"][:-3])
+        if num>=weight-1 and num<=weight+1:
+            output.append(pokemon)
+    return output
 if __name__ == "__main__":
     app.debug = True
     app.run()
-
-
-with open("prize.json") as dct:
-    collection.drop()
-    prizeDct = json.load(dct)
-
-def importJson():
-    collection.insert_many(prizeDct["prizes"])
-
-def search_year(year):
-    # Gets all of the documents with the given year
-    # collection is the same thing as db.prizes
-    print("Prizes with year:",year)
-    prizes = collection.find({"year":str(year)})
-    for prize in prizes:
-        print(prize,"\n")
-
-def search_category(category):
-    # Gets all of the documents with the given category
-    print("Prizes with category:",category)
-    category = category.lower()
-    prizes = collection.find({"category":category})
-    for prize in prizes:
-        print(prize,"\n")
-
-def search_category_year(category,year):
-    # Gets all of the documents with the given category and year
-    print("Prizes from:",year,"with category:",category)
-    category = category.lower()
-    prizes = collection.find({'$and': [{"category":category},{"year":str(year)}]})
-    for prize in prizes:
-        print(prize,"\n")
-
-def search_category_after_year(category,year):
-    # Gets all of the documents with the given category and is after the given year
-    print("Prizes after",year,"with category:",category)
-    category = category.lower()
-    prizes = collection.find({"$and":[{"category":category},{"year":{"$gte":str(year)}}]})
-    for prize in prizes:
-        print(prize)
-
-def search_num_lauretes(num):
-    # Gets all of the documents where the number of lauretes is that number
-    print("Prizes that had",num,"lauretes")
-    prizes = collection.find()
-    output = []
-    for prize in prizes:
-        if len(prize['laureates']) == num:
-            output.append(prize)
-    for prize in output:
-        print(prize)
