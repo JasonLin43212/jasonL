@@ -13,7 +13,6 @@ var prevX = null;
 var prevY = null;
 
 var draw_shapes = function(x,y) {
-
     var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
     c.setAttribute( "cx", x );
     c.setAttribute( "cy", y );
@@ -22,7 +21,6 @@ var draw_shapes = function(x,y) {
     pic.appendChild( c );
 
     if (!isClear){
-
         var l = document.createElementNS("http://www.w3.org/2000/svg", "line");
         l.setAttribute('x1', x);
         l.setAttribute('y1', y);
