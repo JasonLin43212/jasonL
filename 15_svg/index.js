@@ -1,3 +1,9 @@
+/*
+Team ISick,YouSick -- Jason Lin and Isaac Jon
+SoftDev2 pd7
+K15 -- Scattered
+2019-03-21
+*/
 //sq__ft,price
 var data = `836,59222
 1167,68212
@@ -986,17 +992,36 @@ var data = `836,59222
 1362,235738
 0,0`
 
-var width = 900, height = 600;
+var width = 800, height = 600;
 
 var chart = d3.select(".chart")
-    .attr("width", width)
+    .attr("width", width+300)
     .attr("height",height)
 
 chart.append("text")
-    .attr("x",width/2)
+    .attr("x",width/2-50)
     .attr("y",0)
     .attr("dy","2em")
     .text("Sacramento Real Estate Transactions");
+
+chart.append("text")
+    .attr("x",width)
+    .attr("y",0)
+    .attr("dy","2em")
+    .text("By Team ISick,YouSick-- Jason Lin, Isaac Jon");
+
+chart.append("text")
+    .attr("x",width/2)
+    .attr("y",height-40)
+    .attr("dy","2em")
+    .text("Square Foot of Property");
+
+chart.append("text")
+    .attr("transform","rotate(-90)")
+    .attr("x",-300)
+    .attr("y",20)
+    .attr("dy","1em")
+    .text("Price in Dollars");
 
 list_data = data.split("\n").filter((x) => {
     return x.split(",")[0] !== "0";
@@ -1009,10 +1034,8 @@ range = list_data.map((y) => {
 domain = list_data.map((x) => {
     return parseInt(x.split(",")[0]);
 });
-domain.push(6100);
+domain.push(6000);
 range.push(900000);
-
-console.log(Math.max(...domain));
 
 list_data = list_data.map((x) => {
     return x.split(",");
