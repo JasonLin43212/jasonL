@@ -1,7 +1,7 @@
 #union of the sets a and b denoted a U b
 # is the set of all objects that are a member of a or b or both
 def union(a,b):
-    return [x for x in a+b if (x in a and x not in b) or (x in b and x not in a) or (x in a and x in b)]
+    return [x for x in a] + [y for y in b if y not in a]
 print(union([1,2,3],[2,3,4]))
 
 # intersection of a and b
