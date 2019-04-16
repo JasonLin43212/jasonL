@@ -2,7 +2,7 @@
 # is the set of all objects that are a member of a or b or both
 def union(a,b):
     return [x for x in a] + [y for y in b if y not in a]
-print(union([1,2,3],[2,3,4]))
+# print(union([1,2,3],[2,3,4]))
 
 # intersection of a and b
 # set of all objects that are a member of both A and B
@@ -28,3 +28,6 @@ def symmetric(a,b):
 def cartesian(a,b):
     return [(x,y) for x in a for y in b]
 # print(cartesian(['hello',5,"bye"],[3,'lol',90]))
+
+def powerset(a):
+    return 
