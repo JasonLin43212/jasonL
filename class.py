@@ -28,6 +28,3 @@ def symmetric(a,b):
 def cartesian(a,b):
     return [(x,y) for x in a for y in b]
 # print(cartesian(['hello',5,"bye"],[3,'lol',90]))
-
-def powerset(a):
-    return 
