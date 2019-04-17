@@ -1,6 +1,6 @@
 # Team Reduce Reuse Recycle -- Simon Tsui and Jason Lin
 # SoftDev2 pd7
-# K20 -- Reductio ad Absurdum
+# K20 --
 # 2019-04-17
 
 from functools import reduce
