@@ -16,17 +16,19 @@ words = words.split()
 f.close()
 words = [0] + words
 # print(words)
-# the = [x for x in words if x == "the"]
-# print(len(the))
+
+# Adds one to the current count if the word is the same as the input
 def word_freq(word):
     return reduce((lambda x,y : x+1 if y.lower() == word else x),words)
-
 # print(word_freq("entirely"))
 
+# Use list comprehension to create a sliding window that adds a 1 if it finds the
+# phrase and 0 if it doesn't match. Then use reduce to add up all the 1s.
 def phrase_freq(phrase):
     phrase = phrase.split()
-    return reduce((lambda x,y: x+y),[1 if words[i:i+len(phrase)] == phrase else 0 for i in range(len(words)-len(phrase)+1) ])
-# group = reduce((lamda x,y : [x[0]+1,x[1]+y] if y == phrase[x[0]] else [0,'']), words)
+    return reduce((lambda x,y: x+y),[1 if words[i:i+len(phrase)] == phrase\
+                                       else 0\
+                                       for i in range(len(words)-len(phrase)+1)])
 # print(phrase_freq("over the"))
 
 def get_most_frequent():
