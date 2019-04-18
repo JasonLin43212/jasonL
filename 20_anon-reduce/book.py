@@ -8,10 +8,8 @@ import string
 
 f = open("tom.txt",'r')
 words = f.read()
-for c in string.punctuation:
+for c in string.punctuation+"“”":
     words = words.replace(c," ")
-words = words.replace('“'," ")
-words = words.replace('”'," ")
 words = words.split()
 f.close()
 words = [0] + words
@@ -31,6 +29,8 @@ def phrase_freq(phrase):
                                        for i in range(len(words)-len(phrase)+1)])
 # print(phrase_freq("over the"))
 
+# Goes through the entire book once and counts the occurance of each word.
+# We were unable to find a reduce/listcomp way to do this
 def get_most_frequent():
     word_dict = {}
     for word in words[1:]:
