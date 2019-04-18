@@ -12,12 +12,11 @@ for c in string.punctuation+"“”":
     words = words.replace(c," ")
 words = words.split()
 f.close()
-words = [0] + words
 # print(words)
 
 # Adds one to the current count if the word is the same as the input
 def word_freq(word):
-    return reduce((lambda x,y : x+1 if y.lower() == word else x),words)
+    return reduce((lambda x,y : x+1 if y.lower() == word else x),words,0)
 # print(word_freq("entirely"))
 
 # Use list comprehension to create a sliding window that adds a 1 if it finds the
@@ -26,8 +25,8 @@ def phrase_freq(phrase):
     phrase = phrase.split()
     return reduce((lambda x,y: x+y),[1 if words[i:i+len(phrase)] == phrase\
                                        else 0\
-                                       for i in range(len(words)-len(phrase)+1)])
-# print(phrase_freq("over the"))
+                                       for i in range(len(words)-len(phrase)+1)],0)
+print(phrase_freq("in the"))
 
 # Goes through the entire book once and counts the occurance of each word.
 # We were unable to find a reduce/listcomp way to do this
@@ -48,4 +47,4 @@ def get_most_frequent():
     return most_word,high_freq
     # return reduce((lambda x,y: ))
     # return reduce((lambda x,y: [y,word_freq(y)] if word_freq(y) > x[1] else x),[["",0]] + list(set(words[1:])))
-print(get_most_frequent())
+# print(get_most_frequent())
