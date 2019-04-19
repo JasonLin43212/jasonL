@@ -42,5 +42,5 @@ def incr_dict(dict, word):
 def get_most_frequent():
     all_word_freq = reduce((lambda x,y: incr_dict(x,y)), words, {"+":-1})
     return reduce((lambda a,b: [b,all_word_freq[b]] if all_word_freq[b] > a[1] else a),all_word_freq.keys(),['',0])
-    
+
 print(get_most_frequent())
