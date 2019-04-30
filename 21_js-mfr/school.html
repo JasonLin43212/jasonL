@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>School Data</title>
+  </head>
+  <body>
+      <h1>Central Tendencies on Data about Schools</h1>
+      <table border = "1">
+          <tr>
+              <td>Percentage of Data Points that had over 50% Asian students in a school year</td>
+              <td id="asian"></td>
+          </tr>
+          <tr>
+              <td>Total Number of Special Education Students in the 2011-2012 school year</td>
+              <td id="sped"></td>
+          </tr>
+          <tr>
+              <td>Total Number of Data Points that had majority female and an enrollment of over 600 in a school year</td>
+              <td id="large_female"></td>
+          </tr>
+      </table>
+      <p>Data From <a href="https://data.cityofnewyork.us/Education/2006-2012-School-Demographics-and-Accountability-S/ihfw-zy9j">here.</a></p>
+      <h2>Explanation</h2>
+      <ul>
+          <li>For the first cental tendency, I used filter to find the number of data points with an <i>asian_per</i> greater than 50 and
+              then divided that number by the number of data points.
+          </li>
+          <li>
+              For the second one, I used filter to get all the data points for the school year 2011-2012. Then I followed it with a reduce
+              to sum up all of the <i>sped_num</i>.
+          </li>
+          <li>
+              For the last central tendency, I used filter to get the data points that had both a greater female population and an enrollment of greater than 600
+          </li>
+      </ul>
+  </body>
+
+  <script type="text/javascript" src="school.js">
+
+  </script>
+</html>
