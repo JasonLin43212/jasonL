@@ -11,9 +11,11 @@ r2 = repeat('goodbye')
 
 def make_counter():
     x = 0
+    # y = 2 #Declaring it here is not closure
     def inner():
         def incr():
             nonlocal x
+            # nonlocal y # After this, it becomes closure
             x += 1
         incr()
         return x
