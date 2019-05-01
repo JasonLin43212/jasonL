@@ -20,20 +20,22 @@ def make_counter():
     return inner
 
 # accessor method of counter
+def access_value(counter):
+    return counter.__closure__[0].cell_contents
+
+
 ctr1 = make_counter()
 print("ctr1",ctr1())
 print("ctr1",ctr1())
+print("accessing ctr1", access_value(ctr1))
 print("ctr1",ctr1())
 ctr2 = make_counter()
 print("ctr2",ctr2())
 print("ctr2",ctr2())
 print("ctr2",ctr2())
+print("accessing ctr2", access_value(ctr2))
 print("ctr1",ctr1())
 print("ctr1",ctr1())
+print("accessing ctr1", access_value(ctr1))
 print("ctr2",ctr2())
-
-def accessor(ctr):
-    nonlocal x
-    return x
-
-print(accessor(ctr1))
+print("accessing ctr2", access_value(ctr2))
