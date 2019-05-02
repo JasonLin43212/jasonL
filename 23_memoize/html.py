@@ -37,9 +37,10 @@ def memoize(f):
             memo[len(memo.keys())] = f(len(memo.keys()))
             memo[len(memo.keys())] = f(len(memo.keys()))
         memo_len = len(memo.keys())
-        if memo_len < x+1:
+        while memo_len < x+1:
             memo[memo_len] = memo[memo_len-1] + memo[memo_len-2]
-        return helper(x)
+            memo_len = len(memo.keys())
+        return memo[x]
     return helper
 
 @memoize
@@ -49,4 +50,4 @@ def fib(n):
     else:
         return fib(n-1) + fib(n-2)
 
-print(fib(800))
+print(fib(100))
