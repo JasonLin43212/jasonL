@@ -31,7 +31,6 @@ greet_heading2 = make_HTML_heading(greet)
 def memoize(f):
     memo = {}
     def helper(x):
-        nonlocal memo
         if x in memo:
             return memo[x]
         if len(memo.keys()) < 2:
